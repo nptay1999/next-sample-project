@@ -6,7 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:next": "next lint",
+    "lint:es": "eslint . --ext ts,tsx,js",
+    "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
+    "lint": "yarn lint:es && yarn lint:style"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --cache"
+    ],
+    "styled.ts": [
+      "stylelint --cache"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged && yarn check:type"
+    }
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
@@ -24,10 +40,26 @@
     "@types/node": "18.11.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
     "autoprefixer": "^10.4.12",
-    "eslint": "8.26.0",
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-next": "12.3.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.18",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.14.0",
+    "stylelint-a11y": "^1.2.3",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "tailwindcss": "^3.2.1",
     "typescript": "4.8.4"
   }
