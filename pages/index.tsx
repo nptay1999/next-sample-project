@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import { Toaster } from 'react-hot-toast';
-import Button from '../components/forms/Button'
 import Input from '../components/forms/Input'
 import TitleComponent from '../components/TitleComponent'
 import { WelcomeProvider } from '../hooks/useWelcome'
@@ -17,7 +16,6 @@ const Home: NextPage = () => {
         <WelcomeProvider>
           <TitleComponent />
           <Input />
-          <Button />
         </WelcomeProvider>
         <div className="flex items-center space-x-3 mt-12">
           <button onClick={() => dispatch(decrement())} className="bg-white shadow-md text-black p-3 w-28">-</button>
