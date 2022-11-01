@@ -9,7 +9,8 @@
     "lint:next": "next lint",
     "lint:es": "eslint . --ext ts,tsx,js",
     "lint:style": "stylelint 'src/**/styled.ts' 'src/**/*.tsx'",
-    "lint": "yarn lint:es && yarn lint:style"
+    "lint": "yarn lint:es && yarn lint:style",
+    "cypress": "cypress open"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "autoprefixer": "^10.4.12",
+    "cypress": "^10.11.0",
     "eslint": "^8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
