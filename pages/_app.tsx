@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import '../styles/app.scss';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import { Toaster } from 'react-hot-toast';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import {
+  QueryClientProvider,
+  QueryClient,
+  Hydrate,
+} from '@tanstack/react-query';
 
 import { store } from '../store';
 
@@ -24,9 +29,12 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Toaster />
       <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          {getLayout(<Component {...pageProps} />)}
-        </Provider>
+        {/* @ts-ignore */}
+        <Hydrate state={pageProps.dehydratedState}>
+          <Provider store={store}>
+            {getLayout(<Component {...pageProps} />)}
+          </Provider>
+        </Hydrate>
       </QueryClientProvider>
     </>
   );

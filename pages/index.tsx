@@ -1,3 +1,4 @@
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { ReactElement } from 'react';
 
 import Input from '../components/forms/Input';
@@ -12,20 +13,23 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { NextPageWithLayout } from './_app';
 
 export async function getServerSideProps() {
-  const hello = await getHello();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['hello'], getHello);
   return {
     props: {
-      hello,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }
 
-const Home: NextPageWithLayout = (props) => {
-  const { data } = useHelloQuery(props);
+const Home: NextPageWithLayout = () => {
+  const { data } = useHelloQuery();
   const count = useAppSelector((state) => {
     return state.counter.value;
   });
   const dispatch = useAppDispatch();
+
+  console.log(data);
 
   return (
     <>

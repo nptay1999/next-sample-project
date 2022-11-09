@@ -3,10 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getHello } from './../services/getHello';
 
-export function useHelloQuery(props: any) {
+export function useHelloQuery() {
   return useQuery(['hello'], getHello, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    initialData: props.hello,
   });
 }
