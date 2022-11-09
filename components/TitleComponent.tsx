@@ -1,7 +1,7 @@
 import React from 'react';
 
-const TitleComponent = () => {
-  return <h1>Welcome</h1>;
+const TitleComponent = ({ name }: { name: string }) => {
+  return <h1>Welcome {name}</h1>;
 };
 
 export default TitleComponent;

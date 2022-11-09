@@ -3,22 +3,35 @@ import { ReactElement } from 'react';
 import Input from '../components/forms/Input';
 import Layout from '../components/layout/Layout';
 import TitleComponent from '../components/TitleComponent';
+import { useHelloQuery } from '../hooks/useHelloQuery';
 import { WelcomeProvider } from '../hooks/useWelcome';
+import { getHello } from '../services/getHello';
 import { decrement, increment } from '../store/features/counterSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 import { NextPageWithLayout } from './_app';
 
-const Home: NextPageWithLayout = () => {
+export async function getServerSideProps() {
+  const hello = await getHello();
+  return {
+    props: {
+      hello,
+    },
+  };
+}
+
+const Home: NextPageWithLayout = (props) => {
+  const { data } = useHelloQuery(props);
   const count = useAppSelector((state) => {
     return state.counter.value;
   });
   const dispatch = useAppDispatch();
+
   return (
     <>
       <div className="home">
         <WelcomeProvider>
-          <TitleComponent />
+          <TitleComponent name={data.name} />
           <Input />
         </WelcomeProvider>
         <div className="flex items-center space-x-3 mt-12">
