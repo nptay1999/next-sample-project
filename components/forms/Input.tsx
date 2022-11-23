@@ -1,11 +1,11 @@
+'use client';
+
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yub from 'yup';
-
-import useWelcome from '../../hooks/useWelcome';
+import toast from 'react-hot-toast';
 
 const Input = () => {
-  const { inputRef, action } = useWelcome();
   return (
     <Formik
       initialValues={{ fullName: '' }}
@@ -16,9 +16,8 @@ const Input = () => {
           .required('Required'),
       })}
       onSubmit={(values, actions) => {
-        console.log(actions);
         const { setSubmitting, resetForm } = actions;
-        console.log(values);
+        toast.success(values.fullName);
         resetForm();
         setSubmitting(false);
       }}
@@ -29,7 +28,6 @@ const Input = () => {
             <div>
               <input
                 type="text"
-                ref={inputRef}
                 placeholder="Enter your name"
                 {...formik.getFieldProps('fullName')}
               />
@@ -40,7 +38,7 @@ const Input = () => {
               ) : null}
             </div>
             <div className="flex items-center justify-center">
-              <button type="submit" disabled={!formik.errors} onClick={action}>
+              <button type="submit" disabled={!formik.errors}>
                 Take Me In!
               </button>
             </div>
